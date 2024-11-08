@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+      - db
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - DATABASE_URL=sqlite:///db.sqlite3
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  db:
+    image: sqlite:latest
+    volumes:
+      - db-data:/db
+
+volumes:
+  db-data:
