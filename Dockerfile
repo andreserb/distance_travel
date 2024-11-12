@@ -9,6 +9,12 @@ RUN apt-get update && \
     apt-get install -y rabbitmq-server && \
     rm -rf /var/lib/apt/lists/*
 
+# Copy the RabbitMQ configuration file
+COPY rabbitmq.config /etc/rabbitmq/
+
+# Configure RabbitMQ to allow remote login
+RUN sed -i 's/# allow_remote_login/allow_remote_login/' /etc/rabbitmq/rabbitmq.config
+
 # Copy the requirements.txt file to the container
 COPY calculate_distance/requirements.txt .
 
