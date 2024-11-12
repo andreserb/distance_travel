@@ -31,5 +31,5 @@ RUN rabbitmq-plugins enable rabbitmq_management
 ENV RABBITMQ_DEFAULT_USER=guest
 ENV RABBITMQ_DEFAULT_PASS=guest
 
-# Run the application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start RabbitMQ service and the FastAPI application
+CMD service rabbitmq-server start && uvicorn main:app --host 0.0.0.0 --port 8000
