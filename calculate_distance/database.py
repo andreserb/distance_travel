@@ -7,7 +7,6 @@ class Database:
         self.latitude = latitude
         self.longitude = longitude
 
-
     def save_location(self):
         # Create the db folder if it does not exist
         db_folder = "db"
